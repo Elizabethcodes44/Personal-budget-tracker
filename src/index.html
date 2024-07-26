@@ -8,30 +8,56 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@1.0.1/css/bulma.min.css"
     />
+    <style>
+      body {
+        background-color: #ffc0cb;
+      }
+      .box {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+      }
+      .container {
+        max-width:1200px;
+        margin: auto;
+      }
+      .column {
+        display:flex;
+        flex-direction:column;
+      }
+      .transaction-box {
+        margin-top: 20px;
+      }
+    </style>
   </head>
   <body>
-    <h1 class="title" style="color: #ffc0cb">Budget Tracker</h1>
+    <div class="container">
+    <h1 class="title has-text-centered" style="color: #000">Budget Tracker</h1>
     <main class="main">
-      <header class="section">
-        <div>
+      <header class="section box">
+        <div class="columns">
+          <div class="column">
           <h5 class="title is-5">Total Balance</h5>
           <span id="balance">Naira0.00</span>
         </div>
-        <div>
+       
+        <div class="column">
           <h5 class="title is-5">Total Income</h5>
           <span id="income">Naira0.00</span>
         </div>
-        <div>
+        <div class="column">
           <h5 class="title is-5">Total Expenses</h5>
           <span id="expenses">Naira0.00</span>
         </div>
+      </div>
       </header>
       <section class="section">
-        <h3 class="title is-3">Transactions</h3>
+        <div class="columns"></div>
+        <h3 class="columns is-3">Transactions</h3>
         <ul id="transactionList"></ul>
         <div id="status"></div>
-      </section>
-      <section>
+      
+
         <h3 class="title is-3">Add Transaction</h3>
         <form id="transactionForm">
           <div class="field">
@@ -77,8 +103,10 @@
             <button type="submit">Submit</button>
           </div>
         </form>
-      </section>
+     
+    </section>
     </main>
     <script src="app.js"></script>
+  </div>
   </body>
 </html>
