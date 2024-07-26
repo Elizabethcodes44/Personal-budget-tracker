@@ -1,41 +1,4 @@
-const transactions = [
-  {
-    id: 1,
-    name: "giveaway",
-    amount: 50000,
-    date: new Date(),
-    type: "income",
-  },
-  {
-    id: 2,
-    name: "shopping",
-    amount: 50000,
-    date: new Date(),
-    type: "expenses",
-  },
-  {
-    id: 3,
-    name: "Rent",
-    amount: 100000,
-    date: new Date(),
-    type: "expenses",
-  },
-  {
-    id: 4,
-    name: "Salary",
-    amount: 500000,
-    date: new Date(),
-    type: "income",
-  },
-  {
-    id: 5,
-    name: "Sanitaries",
-    amount: 10000,
-    date: new Date(),
-    type: "expenses",
-  },
- 
-];
+const transactions = JSON.parse(localStorage.getItem('transactions')) || [];
 const list = document.getElementById("transactionList");
 const form = document.getElementById("transactionForm")
 const status = document.getElementById("status");
@@ -90,24 +53,42 @@ function deleteTransaction(id) {
     const index = transactions.findIndex((trx)=> trx.id === id);
     transactions.splice(index, 1);
     renderList();
+    saveTransactions();
     newTotal();
     
 }
 function addTransaction(e) {
     e.preventDefault();
+    
     const formData = new FormData(form);
-    //alert(formData.get('name'));
+    const name = formData.get("name");
+    const amount = parseFloat(formData.get("amount"));
+    const date = new Date(formData.get("date"));
+    const type = formData.get("type");
+    
+    if (!name || isNaN(amount) || amount <= 0 || !type) {
+        alert("Please fill in all fields correctly.");
+        return;
+    }
+    
     transactions.push({
         id: transactions.length + 1,
-        name: formData.get("name"),
-        amount: parseFloat(formData.get("amount")),
-        date: new Date(formData.get("date")),
-        type: formData.get("type"),
+        name,
+        amount,
+        date,
+        type
     });
+    
     form.reset();
-
     renderList();
+    saveTransactions();
     newTotal();
 }
+
+function saveTransactions() {
+    transactions.sort((a, b) => new Date(b.date) - new Date(a.date))
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+}
 renderList();
+saveTransactions();
 newTotal();
