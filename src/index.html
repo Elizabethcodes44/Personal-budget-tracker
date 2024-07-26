@@ -34,18 +34,20 @@
         <div id="status"></div>
       </section>
       <section>
-        <h3 class="title is-3">Adddd Transaction</h3>
+        <h3 class="title is-3">Add Transaction</h3>
         <form id="transactionForm">
           <div class="field">
-            <label class="label" for="type"></label>
+            <label class="label" for="type">Type</label>
             <div class="control">
-            <input type = "checkbox" name="name" id="type" required/>
-            <div class="option">
-              <span>Expense</span>
-              <span>Income</span>
+              <label class="radio">
+                <input type="radio" name="type" value="income" required /> Income
+              </label>
+              <label class="radio">
+                <input type="radio" name="type" value="expenses" required /> Expenses
+              </label>
             </div>
-        </div>
-        </div>
+          </div>
+      
             <div class="field">
                 <label class="label" for="name">Name</label>
                 <div class="control">
