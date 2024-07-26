@@ -41,6 +41,8 @@
         border-radius: 5px;
         cursor: pointer;
         
+        outline: none;
+        box-shadow: none;
       }
       .columnbox {
         background-color: none;
@@ -62,6 +64,41 @@
         padding-top:20px;
         overflow-y: scroll;
       }
+      .headerContainer{
+        width:100%;
+        padding: 10px;
+      }
+      @media (max-width: 768px) {
+        .container {
+          padding: 10px;
+        }
+      
+        .column {
+          flex-direction: column;
+        }
+      
+        .columnbox,
+        .transactionbox {
+          width: 100%;
+          max-width: none;
+          margin-bottom: 20px;
+        }
+        .headerContainer{
+          width: 80%;
+        }
+      
+        button {
+          font-size: 16px;
+          
+        }
+      }
+      
+      @media (max-width: 480px) {
+        button {
+          font-size: 14px;
+          padding: 6px 12px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -70,6 +107,7 @@
         My Budget Tracker
       </h1>
       <main class="main">
+        <div class="headerContainer">
         <header class="section box">
           <div class="columns has-text-centered">
             <div class="column">
@@ -87,6 +125,7 @@
             </div>
           </div>
         </header>
+      </div>
         <section class="section has-text-centered ">
           <div class="columns ">
             <div class="transactionbox ">
