@@ -36,14 +36,14 @@ function renderList() {
     const listItem = document.createElement("li");
     listItem.innerHTML = `
             <div class="name">
-            <h4 class="title is-4">${name}</h4> 
-            <p>${new Date(date).toLocaleDateString()}</p>
+            <h4 class="title is-4" style="font-size: 2.0rem;">${name}</h4> 
+            <p style="font-size: 1.5rem;">${new Date(date).toLocaleDateString()}</p>
             </div>
-            <div class= "amount">
+            <div class= "amount" style="font-size: 1.5rem;">
             <span>${formatter.format(amount * sign)}</span></div>
-            <div class="action">
-                <button onclick="deleteTransaction(${id})">Delete</button>
-                <button onClick="editTransaction(${id})">Edit<button>
+            <div class="action mt-4 mb-6">
+                <button style="font-size: 1.5rem background-color: #007bff; color: white; padding: 10px 20px;" onclick="deleteTransaction(${id})">Delete</button>
+                <button style="font-size: 1.5rem background-color: #007bff; color: white; padding: 10px 20px;" onClick="editTransaction(${id})">Edit<button>
             </div>`;
             
     list.appendChild(listItem);
