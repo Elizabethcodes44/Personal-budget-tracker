@@ -11,102 +11,145 @@
     <style>
       body {
         background-color: #ffc0cb;
+        font-family: monospace;
+        margin: 0;
+        padding: 0;
       }
-      .box {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 5px;
-      }
+
       .container {
-        max-width:1200px;
+        max-width: 1200px;
         margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+      header {
+        width: 100%;
       }
       .column {
-        display:flex;
-        flex-direction:column;
+        display: flex;
+        flex-direction: column;
       }
-      .transaction-box {
-        margin-top: 20px;
+
+      button {
+        background-color: black;
+        color: white;
+      
+        border: none;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        
+      }
+      .columnbox {
+        background-color: none;
+        width: 100%;
+        width: 500px;
+        height: auto;
+        outline: white 2px solid;
+        margin-left: 50px;
+        padding-top:20px;
+        padding-bottom: 10px;
+      }
+     
+      .transactionbox {
+        background-color: transparent;
+        width: 100%;
+        width: 500px;
+        height: 400px;
+        outline: white 2px solid; /* Use solid outline instead of border */
+        padding-top:20px;
+        overflow-y: scroll;
       }
     </style>
   </head>
   <body>
     <div class="container">
-    <h1 class="title has-text-centered" style="color: #000">Budget Tracker</h1>
-    <main class="main">
-      <header class="section box">
-        <div class="columns">
-          <div class="column">
-          <h5 class="title is-5">Total Balance</h5>
-          <span id="balance">Naira0.00</span>
-        </div>
-       
-        <div class="column">
-          <h5 class="title is-5">Total Income</h5>
-          <span id="income">Naira0.00</span>
-        </div>
-        <div class="column">
-          <h5 class="title is-5">Total Expenses</h5>
-          <span id="expenses">Naira0.00</span>
-        </div>
-      </div>
-      </header>
-      <section class="section">
-        <div class="columns"></div>
-        <h3 class="columns is-3">Transactions</h3>
-        <ul id="transactionList"></ul>
-        <div id="status"></div>
-      
+      <h1 class="title has-text-centered" style="color: #000">
+        My Budget Tracker
+      </h1>
+      <main class="main">
+        <header class="section box">
+          <div class="columns has-text-centered">
+            <div class="column">
+              <h5 class="title is-5">Total Balance</h5>
+              <span id="balance">Naira0.00</span>
+            </div>
 
-        <h3 class="title is-3">Add Transaction</h3>
-        <form id="transactionForm">
-          <div class="field">
-            <label class="label" for="type">Type</label>
-            <div class="control">
-              <label class="radio">
-                <input type="radio" name="type" value="income" required />
-                Income
-              </label>
-              <label class="radio">
-                <input type="radio" name="type" value="expenses" required />
-                Expenses
-              </label>
+            <div class="column">
+              <h5 class="title is-5">Total Income</h5>
+              <span id="income">Naira0.00</span>
+            </div>
+            <div class="column">
+              <h5 class="title is-5">Total Expenses</h5>
+              <span id="expenses">Naira0.00</span>
             </div>
           </div>
+        </header>
+        <section class="section has-text-centered ">
+          <div class="columns ">
+            <div class="transactionbox ">
+              <h3 class="title is-3">Payments</h3>
+              <ul id="transactionList"></ul>
+              <div id="status"></div>
+            </div>
+            <div class="columnbox">
+              <h3 class="title is-3">Add Payments</h3>
+              <form id="transactionForm">
+                <div class="field">
+                  <label class="label" for="type">Type of Payment</label>
+                  <div class="control">
+                    <label class="radio">
+                      <input type="radio" name="type" value="income" required />
+                      My Income
+                    </label>
+                    <label class="radio">
+                      <input
+                        type="radio"
+                        name="type"
+                        value="expenses"
+                        required
+                      />
+                      My Expenses
+                    </label>
+                  </div>
+                </div>
 
-          <div class="field">
-            <label class="label" for="name">Name</label>
-            <div class="control">
-              <input type="text" name="name" required />
+                <div class="field">
+                  <label class="label" for="name">Payment Name</label>
+                  <div class="control">
+                    <input type="text" name="name" required />
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label" for="amount">Amount</label>
+                  <div class="control">
+                    <input
+                      type=" number"
+                      name="amount"
+                      value="0"
+                      min="0.01"
+                      step="0.01"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label" for="date">Date</label>
+                  <div class="control">
+                    <input type="date" name="date" required />
+                  </div>
+                </div>
+                <div class="control">
+                  <button type="submit">Submit</button>
+                </div>
+              </form>
             </div>
           </div>
-          <div class="field">
-            <label class="label" for="amount">Amount</label>
-            <div class="control">
-              <input
-                type=" number"
-                name="amount"
-                value="0"
-                min="0.01"
-                step="0.01"
-                required
-              />
-            </div>
-          </div>
-          <div class="field">
-            <label class="label" for="date">Date</label>
-            <div class="control">
-              <input type="date" name="date" required />
-            </div>
-          </div>
-          <div class="control">
-            <button type="submit">Submit</button>
-          </div>
-        </form>
-     
-    </section>
-    </main>
+        </section>
+      </main>
+    </div>
     <script src="app.js"></script>
-  </div>
   </body>
 </html>
