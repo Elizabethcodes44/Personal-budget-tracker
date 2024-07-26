@@ -49,12 +49,12 @@ const formatter = new Intl.NumberFormat("en-NG", {
 });
 form.addEventListener('submit', addTransaction);
 function newTotal() {
-    const incomeTotal = transactions.filter(trx => trx.type === 'income').reduce((total, trx) => total + trx.amount, 0);
-    const expensesTotal = transactions.filter(trx => trx.type === 'expenses').reduce((total, trx) => total + trx.amount, 0);
+    const incomeTotal = transactions.filter((trx) => trx.type === "income").reduce((total, trx) => total + trx.amount, 0);
+    const expensesTotal = transactions.filter((trx) => trx.type === 'expenses').reduce((total, trx) => total + trx.amount, 0);
     const balanceTotal = incomeTotal - expensesTotal
-    balance.textContent = formatter.format(balanceTotal).substring(1);
+    balance.textContent = formatter.format(balanceTotal);
     
-    income.textContent = formatter.format(incomeTotal * -1);
+    income.textContent = formatter.format(incomeTotal);
     
     expenses.textContent = formatter.format(expensesTotal);
 }
@@ -68,7 +68,7 @@ function renderList() {
     status.textContent = "";
   }
   transactions.forEach(({ id, name, date, amount, type }) => {
-    const sign = 'income' === type ? 1 : -1;
+    const sign = type === "income" ? 1 : -1;
     const listItem = document.createElement("li");
     listItem.innerHTML = `
             <div class="name">
@@ -84,8 +84,7 @@ function renderList() {
     list.appendChild(listItem);
   });
 }
-renderList();
-newTotal();
+
 function deleteTransaction(id) {
     
     const index = transactions.findIndex((trx)=> trx.id === id);
@@ -96,17 +95,19 @@ function deleteTransaction(id) {
 }
 function addTransaction(e) {
     e.preventDefault();
-    const formData = new formData(this);
+    const formData = new FormData(form);
     //alert(formData.get('name'));
     transactions.push({
         id: transactions.length + 1,
         name: formData.get("name"),
         amount: parseFloat(formData.get("amount")),
         date: new Date(formData.get("date")),
-        type: 'on' === formData.get('type') ? 'income' : "expense"
+        type: formData.get("type"),
     });
-    this.reset();
+    form.reset();
 
     renderList();
     newTotal();
 }
+renderList();
+newTotal();
