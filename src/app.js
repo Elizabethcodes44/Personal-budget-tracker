@@ -10,6 +10,7 @@ const formatter = new Intl.NumberFormat("en-NG", {
   currency: "NGN",
   signDisplay: "always",
 });
+let editId = null;
 form.addEventListener('submit', addTransaction);
 function newTotal() {
     const incomeTotal = transactions.filter((trx) => trx.type === "income").reduce((total, trx) => total + trx.amount, 0);
@@ -42,6 +43,7 @@ function renderList() {
             <span>${formatter.format(amount * sign)}</span></div>
             <div class="action">
                 <button onclick="deleteTransaction(${id})">Delete</button>
+                <button onClick="editTransaction(${id})">Edit<button>
             </div>`;
             
     list.appendChild(listItem);
@@ -57,33 +59,41 @@ function deleteTransaction(id) {
     newTotal();
     
 }
-function addTransaction(e) {
-    e.preventDefault();
-    
-    const formData = new FormData(form);
-    const name = formData.get("name");
-    const amount = parseFloat(formData.get("amount"));
-    const date = new Date(formData.get("date"));
-    const type = formData.get("type");
-    
-    if (!name || isNaN(amount) || amount <= 0 || !type) {
-        alert("Please fill in all fields correctly.");
-        return;
+function editTransaction(id) {
+    const transaction = transactions.find((trx) => trx.id === id);
+    if (transaction) {
+      form.querySelector('[name="name"]').value = transaction.name;
+      form.querySelector('[name="amount"]').value = transaction.amount;
+      form.querySelector('[name="date"]').value = new Date(transaction.date).toISOString().split('T')[0];
+      form.querySelector(`[name="type"][value="${transaction.type}"]`).checked = true;
+      editId = id;
     }
-    
-    transactions.push({
-        id: transactions.length + 1,
-        name,
-        amount,
-        date,
-        type
-    });
-    
+  }
+  function addTransaction(e) {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const transaction = {
+      id: editId || transactions.length + 1,
+      name: formData.get("name"),
+      amount: parseFloat(formData.get("amount")),
+      date: new Date(formData.get("date")),
+      type: formData.get("type"),
+    };
+  
+    if (editId) {
+      const index = transactions.findIndex((trx) => trx.id === editId);
+      transactions[index] = transaction;
+      editId = null; // Reset editId
+    } else {
+      transactions.push(transaction);
+    }
+  
     form.reset();
     renderList();
     saveTransactions();
     newTotal();
-}
+  }
+  
 
 function saveTransactions() {
     transactions.sort((a, b) => new Date(b.date) - new Date(a.date))
