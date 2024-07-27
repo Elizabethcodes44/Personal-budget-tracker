@@ -10,7 +10,7 @@
     />
     <style>
       body {
-        background-color: #ffc0cb;
+        background-color: pink;
         font-family: monospace;
         margin: 0;
         padding: 0;
@@ -59,7 +59,7 @@
         background-color: transparent;
         width: 100%;
         width: 500px;
-        height: 400px;
+        height: 530px;
         outline: white 2px solid; /* Use solid outline instead of border */
         padding-top:20px;
         overflow-y: scroll;
@@ -109,16 +109,16 @@
           <div class="columns has-text-centered">
             <div class="column">
               <h5 class="title is-5">Total Balance</h5>
-              <span id="balance">Naira0.00</span>
+              <span id="balance" style="font-size: 1.5rem; color:blue">Naira0.00</span>
             </div>
 
             <div class="column">
               <h5 class="title is-5">Total Income</h5>
-              <span id="income">Naira0.00</span>
+              <span id="income" style="font-size: 1.5rem; color:green">Naira0.00</span>
             </div>
             <div class="column">
               <h5 class="title is-5">Total Expenses</h5>
-              <span id="expenses">Naira0.00</span>
+              <span id="expenses" style="font-size: 1.5rem; color:red">Naira0.00</span>
             </div>
           </div>
         </header>
@@ -134,13 +134,13 @@
               <h3 class="title is-3">Add Payments</h3>
               <form id="transactionForm">
                 <div class="field">
-                  <label class="label" for="type">Type of Payment</label>
+                  <label class="label" for="type" style="font-size: 1.5rem;" >Type of Payment</label>
                   <div class="control">
-                    <label class="radio">
+                    <label style="font-size: 1.5rem;" class="radio">
                       <input type="radio" name="type" value="income" required />
                       My Income
                     </label>
-                    <label class="radio">
+                    <label style="font-size: 1.5rem;" class="radio">
                       <input
                         type="radio"
                         name="type"
@@ -153,15 +153,16 @@
                 </div>
 
                 <div class="field">
-                  <label class="label" for="name">Payment Name</label>
+                  <label class="label" for="name" style="font-size: 1.0rem;">Payment Name</label>
                   <div class="control">
-                    <input type="text" name="name" required />
+                    <input style="font-size: 1.0rem; padding: 12px; height: auto;" type="text" name="name" required />
                   </div>
                 </div>
                 <div class="field">
                   <label class="label" for="amount">Amount</label>
                   <div class="control">
                     <input
+                    style="font-size: 1.0rem; padding: 12px; height: auto;"
                       type=" number"
                       name="amount"
                       value="0"
@@ -174,11 +175,12 @@
                 <div class="field">
                   <label class="label" for="date">Date</label>
                   <div class="control">
-                    <input type="date" name="date" required />
+                    <input 
+                    style="font-size: 1.0rem; padding: 12px; height: auto;" type="date" name="date" required />
                   </div>
                 </div>
                 <div class="control">
-                  <button style="font-size: 1.5rem background-color:#007bff color: white; padding10px 20px" type="submit">Submit</button>
+                  <button style= "font-size: 1.5rem; color: white; padding: 10px 20px;" type="submit">Submit</button>
                 </div>
               </form>
             </div>
